@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PlayerActivity"
+    android:background="@drawable/final1"
+
+    >
+    <RelativeLayout
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_layout"
+
+        >
+
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_centerInParent="true"
+            />
+
+
+        <SeekBar
+            android:id="@+id/seek_bar"
+            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            />
+
+    </RelativeLayout>
+
+    <android.support.design.widget.CoordinatorLayout
+
+        android:id="@+id/bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        >
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/back_word"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/back_word"
+                android:gravity="center"
+                android:textSize="30dp"
+                />
+            <TextView
+                android:id="@+id/start_stop"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/start"
+                android:gravity="center"
+                android:textSize="30dp"
+                />
+            <TextView
+                android:id="@+id/for_word"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/for_word_word"
+                android:gravity="center"
+                android:textSize="30dp"
+                />
+
+        </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
+
+</RelativeLayout>

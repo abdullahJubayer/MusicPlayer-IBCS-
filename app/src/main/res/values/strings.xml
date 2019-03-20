@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Music Player</string>
+    <string name="back_word"><![CDATA[<<]]></string>
+    <string name="for_word_word"><![CDATA[>>]]></string>
+    <string name="start"><![CDATA[>|]]></string>
+    <string name="stop"><![CDATA[||]]></string>
+</resources>

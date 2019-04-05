@@ -19,13 +19,15 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
     ImageView imageView;
     SeekBar seekBar;
     MediaPlayer mediaPlayer;
-    ArrayList<File> song;
+    ArrayList<String> song;
+    int sPosition;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
 
-         song= (ArrayList<File>) getIntent().getParcelableArrayListExtra("songList");
+         song=getIntent().getStringArrayListExtra("songList");
+        sPosition=getIntent().getIntExtra("position",-1);
 
         txtFw=findViewById(R.id.for_word);
         txtBc=findViewById(R.id.back_word);
@@ -37,12 +39,18 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
         txtBc.setOnClickListener(this);
         txt_st_sp.setOnClickListener(this);
 
+        initialMediaPlayre(sPosition);
 
-        if (path.isEmpty() || path==null){
-            Toast.makeText(PlayerActivity.this,"File Not Found",Toast.LENGTH_SHORT).show();
+    }
+
+    private void initialMediaPlayre(int position){
+        if (position >= song.size()){
+            txt_st_sp.setText(">|");
+            seekBar.setProgress(0);
         }else {
-            mediaPlayer=MediaPlayer.create(PlayerActivity.this, Uri.parse(path));
+            mediaPlayer=MediaPlayer.create(PlayerActivity.this, Uri.parse(song.get(position)));
             seekBar.setMax(mediaPlayer.getDuration());
+
         }
 
 
@@ -66,9 +74,23 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
+                sPosition=sPosition+1;
+                txt_st_sp.setText(">|");
+                seekBar.setProgress(0);
+                if (sPosition < song.size()){
+                    txt_st_sp.setText("||");
+                    initialMediaPlayre(sPosition);
+                    mediaPlayer.start();
+                    setSeekBarProgress();
 
+                }else {
+                    Toast.makeText(PlayerActivity.this,"No More Song",Toast.LENGTH_SHORT).show();
                     txt_st_sp.setText(">|");
                     seekBar.setProgress(0);
+                }
+
+
+
             }
         });
 
@@ -116,10 +138,11 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        mediaPlayer.stop();
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (mediaPlayer != null){
+            mediaPlayer=null;
+        }
     }
-
-
 }
